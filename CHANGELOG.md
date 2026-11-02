@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-11-02
+### Fixed
+- Tìm kiếm DVD theo tiêu đề không phân biệt chữ hoa, chữ thường (`search_by_title`) (Refs #20).
+
 ## [1.0.0] - 2026-11-02
 ### Added
 - `Cart.print_cart()`: Hiển thị danh sách các đĩa đã đặt và tổng chi phí.
