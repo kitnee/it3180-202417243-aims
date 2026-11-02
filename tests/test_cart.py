@@ -8,8 +8,18 @@ class TestCart(unittest.TestCase):
         cart = Cart()
         for i in range(MAX_NUMBERS_ORDERED):
             self.assertTrue(cart.add_dvd(DigitalVideoDisc(f"DVD {i}", cost=10.0)))
-        # Đĩa thứ 21 vượt quá giới hạn, phải trả về False
         self.assertFalse(cart.add_dvd(DigitalVideoDisc("Extra DVD", cost=10.0)))
+
+    def test_total_cost_with_discount(self):
+        cart = Cart()
+        cart.add_dvd(DigitalVideoDisc("DVD 1", cost=100.0))
+        # 100 giảm 20% phải còn 80
+        self.assertAlmostEqual(cart.total_cost_with_discount(20), 80.0)
+        # Giảm giá ngoài khoảng 0-100 phải ném ValueError
+        with self.assertRaises(ValueError):
+            cart.total_cost_with_discount(150)
+        with self.assertRaises(ValueError):
+            cart.total_cost_with_discount(-10)
 
 
 if __name__ == "__main__":
