@@ -10,12 +10,17 @@ class TestCart(unittest.TestCase):
             self.assertTrue(cart.add_dvd(DigitalVideoDisc(f"DVD {i}", cost=10.0)))
         self.assertFalse(cart.add_dvd(DigitalVideoDisc("Extra DVD", cost=10.0)))
 
+    def test_remove_dvd(self):
+        cart = Cart()
+        dvd = DigitalVideoDisc("Aladdin", cost=18.99)
+        cart.add_dvd(dvd)
+        self.assertTrue(cart.remove_dvd(dvd))
+        self.assertFalse(cart.remove_dvd(dvd))
+
     def test_total_cost_with_discount(self):
         cart = Cart()
         cart.add_dvd(DigitalVideoDisc("DVD 1", cost=100.0))
-        # 100 giảm 20% phải còn 80
         self.assertAlmostEqual(cart.total_cost_with_discount(20), 80.0)
-        # Giảm giá ngoài khoảng 0-100 phải ném ValueError
         with self.assertRaises(ValueError):
             cart.total_cost_with_discount(150)
         with self.assertRaises(ValueError):
